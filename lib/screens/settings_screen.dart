@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:preferences_app/shared_preferences/preferences.dart';
 import 'package:preferences_app/widgets/widgets.dart';
 
 class SettingsScreen extends StatefulWidget {
-    static const String routerName = 'settings';
+  static const String routerName = 'settings';
 
   const SettingsScreen({Key? key}) : super(key: key);
 
@@ -11,73 +12,68 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-
-  bool _isDarkMode = false;
+  /* bool _isDarkMode = false;
   int _genere = 1;
-  String _nom = 'Jaume Camps';
+  String _nom = 'Jaume Camps'; */
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
-      drawer: const SideMenu(),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Configuració', style: TextStyle(fontSize: 45, fontWeight: FontWeight.w300)),
-              const Divider(),
-              SwitchListTile(
-                value: _isDarkMode,
-                title: const Text('Dark Mode'),
-                onChanged: (value){
-                  _isDarkMode = value;
-                  setState(() {});
-                }
-              ),
-              const Divider(),
-              RadioListTile<int>(
-                value: 1,
-                groupValue: _genere,
-                title: const Text('Masculino'),
-                onChanged: (value){
-                  _genere = value ?? 1;
-                  setState(() {});
-                }
-              ),
-              const Divider(),
-              RadioListTile<int>(
-                value: 2,
-                groupValue: _genere,
-                title: const Text('Femenino'),
-                onChanged: (value){
-                  _genere = value ?? 1;
-                  setState(() {});
-                }
-              ),
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  initialValue: 'Jaume Camps',
-                  onChanged: (value){
-                    _nom = value;
-                    setState(() {});
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Nom',
-                    helperText: 'Nom de l\'usuari'
-                  ),
-                ),
-              )
-            ],
-          ),
+        appBar: AppBar(
+          title: const Text('Settings'),
         ),
-      )
-    );
+        drawer: const SideMenu(),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Configuració',
+                    style:
+                        TextStyle(fontSize: 45, fontWeight: FontWeight.w300)),
+                const Divider(),
+                SwitchListTile(
+                    value: Preferences.isDarkMode,
+                    title: const Text('Dark Mode'),
+                    onChanged: (value) {
+                      Preferences.isDarkMode = value;
+                      setState(() {});
+                    }),
+                const Divider(),
+                RadioListTile<int>(
+                    value: 1,
+                    groupValue: _genere,
+                    title: const Text('Masculino'),
+                    onChanged: (value) {
+                      _genere = value ?? 1;
+                      setState(() {});
+                    }),
+                const Divider(),
+                RadioListTile<int>(
+                    value: 2,
+                    groupValue: _genere,
+                    title: const Text('Femenino'),
+                    onChanged: (value) {
+                      _genere = value ?? 1;
+                      setState(() {});
+                    }),
+                Divider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextFormField(
+                    initialValue: 'Jaume Camps',
+                    onChanged: (value) {
+                      _nom = value;
+                      setState(() {});
+                    },
+                    decoration: InputDecoration(
+                        labelText: 'Nom', helperText: 'Nom de l\'usuari'),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ));
   }
 }
