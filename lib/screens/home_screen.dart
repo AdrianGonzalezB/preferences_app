@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:preferences_app/shared_preferences/preferences.dart';
 import 'package:preferences_app/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,21 +10,20 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      drawer: const SideMenu(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const [
-          Text('Dark Mode'),
-          Divider(),
-          Text('Gènere'),
-          Divider(),
-          Text('Nom d\'usuari:'),
-          Divider()
-        ],
-      )
-    );
+        appBar: AppBar(
+          title: const Text('Home'),
+        ),
+        drawer: const SideMenu(),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Dark Mode: ${Preferences.isDarkMode}'),
+            Divider(),
+            Text('Gènere: ${Preferences.genere}'),
+            Divider(),
+            Text('Nom d\'usuari: ${Preferences.nom}'),
+            Divider()
+          ],
+        ));
   }
 }

@@ -11,7 +11,9 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
-          create: (_) => ThemeProvider(isDarkMode: Preferences.isDarkMode))
+        create: (_) => ThemeProvider(isDarkMode: Preferences.isDarkMode),
+        lazy: false,
+      )
     ],
     child: MyApp(),
   ));
@@ -19,7 +21,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     //Preferences.init();
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routerName: (_) => const HomeScreen(),
         SettingsScreen.routerName: (_) => const SettingsScreen()
       },
-      theme: ThemeData.dark(),
+      theme: Provider.of<ThemeProvider>(context).currenTheme,
     );
   }
 }
